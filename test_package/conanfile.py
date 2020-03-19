@@ -23,6 +23,6 @@ class TestPackageConan(ConanFile):
         cmake.build()
 
     def test(self):
-        with tools.environment_append(RunEnvironment(self).vars):
-            bin_path = os.path.join("lib", "libtest_package.so")
-        
+        if not tools.cross_building(self.settings):
+            os.chdir("lib")
+            self.run("java -jar test.jar", run_environment=True)        

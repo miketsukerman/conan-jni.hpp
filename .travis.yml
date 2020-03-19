@@ -11,7 +11,6 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-7
-            - lcov
           update: true
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
@@ -25,7 +24,6 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-8
-            - lcov
           update: true
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
@@ -39,7 +37,6 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-9
-            - lcov
           update: true
       env:
         - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
@@ -55,10 +52,53 @@ matrix:
           packages:
             - clang-6.0
             - libc++-dev
-            - lcov
           update: true
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
+
+    - os: linux
+      dist: xenial
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-7
+          packages:
+            - clang-7
+            - libc++-dev
+          update: true
+      env:
+        - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7"
+    - os: linux
+      dist: xenial
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-8
+          packages:
+            - clang-8
+            - libc++-dev
+          update: true
+      env:
+        - MATRIX_EVAL="CC=clang-8 && CXX=clang++-8"
+    - os: linux
+      dist: xenial
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - sourceline: 'deb https://apt.llvm.org/xenial/ llvm-toolchain-xenial-9 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-9
+            - libc++-dev
+          update: true
+      env:
+        - MATRIX_EVAL="CC=clang-9 && CXX=clang++-9"
 
 before_install:
   - eval "${MATRIX_EVAL}"
