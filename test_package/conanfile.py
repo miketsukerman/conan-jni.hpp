@@ -25,4 +25,4 @@ class TestPackageConan(ConanFile):
     def test(self):
         if not tools.cross_building(self.settings):
             os.chdir("lib")
-            self.run("java -jar test.jar", run_environment=True)        
+            self.run("LD_LIBRARY_PATH='{}' java -jar test.jar".format(os.curdir), run_environment=True)        
