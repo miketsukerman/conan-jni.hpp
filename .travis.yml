@@ -69,7 +69,9 @@ matrix:
             - libc++-dev
           update: true
       env:
+        - CONAN_OPTS="-s compiler.version=7.1"
         - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7"
+
     - os: linux
       dist: xenial
       compiler: clang
@@ -115,4 +117,4 @@ before_script:
   - cd ${TRAVIS_BUILD_DIR}
 
 script:
-  - conan create .
+  - conan create ${CONAN_OPTS} .
